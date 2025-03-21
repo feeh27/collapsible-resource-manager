@@ -239,16 +239,25 @@
                  * so this filter them out to avoid the panel expanding blank
                  */
                 const menus = cloneDeep(this.$store.getters[ 'mainMenu' ])
+                const builtMenu = []
 
                 for (const menu of menus) {
-
-                    if (menu.items.length) {
-                        menu.items = menu.items.filter(item => item.component !== null)
+                    if (undefined === menu.items?.length) {
+                      continue
                     }
+
+                    // Checks if menu section has items or path is a valid value
+                    if (menu.items.length === 0 && [null, undefined, ''].includes(menu.path)) {
+                      continue
+                    }
+
+                    menu.items = menu.items.filter(item => item.component !== null)
+
+                    builtMenu.push(menu)
 
                 }
 
-                return menus
+                return builtMenu
 
             },
             notificationCenterEnabled() {
