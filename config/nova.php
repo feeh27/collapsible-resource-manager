@@ -9,4 +9,5 @@ return [
     'section_title' => true,
     'collapse_on_select' => false,
     'collapse_on_refresh' => false,
+    'collapse_on_navigate' => false,
 ];

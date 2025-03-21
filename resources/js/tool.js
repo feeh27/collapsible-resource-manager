@@ -1,6 +1,7 @@
 import Menu from './components/Menu.vue'
 import Noop from './components/Noop.vue'
 import { createVNode, render, nextTick } from 'vue'
+import { router } from '@inertiajs/vue3'
 
 function getNovaVersion() {
     const [ version ] = Nova.config('version').replaceAll('.', '').trim().match(/^\d+/)
@@ -16,7 +17,15 @@ const settings = {
     ThemeDropdown: config.move_theme_switcher,
 }
 
-Nova.booting(app => {
+Nova.booting((app, store) => {
+
+    router.on('before', () => {
+        ;(async () => {
+            if (config.collapse_on_navigate) {
+                store.state.mainMenuShown = false
+            }
+        })()
+    })
 
     const components = {
         NotificationCenter: null,
