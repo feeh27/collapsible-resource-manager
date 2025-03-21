@@ -65,6 +65,7 @@ and notification icon to be moved to the bottom left side, you can manually disa
         'section_title' => true,
         'collapse_on_select' => true,
         'collapse_on_refresh' => false,
+        'collapse_on_navigate' => false,
     ]
 ]
 ```
